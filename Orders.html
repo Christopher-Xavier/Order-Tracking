@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #0073e6;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #0073e6;
+            color: white;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .pending {
+            background-color: #ffcc00;
+        }
+        .shipped {
+            background-color: #00cc66;
+            color: white;
+        }
+        .delivered {
+            background-color: #0099ff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>Business Order Tracking</header>
+
+<div class="container">
+    <h2>Orders Overview</h2>
+    <table>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Product</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td>1001</td>
+            <td>John Doe</td>
+            <td>Smartphone</td>
+            <td><span class="status pending">Pending</span></td>
+        </tr>
+        <tr>
+            <td>1002</td>
+            <td>Jane Smith</td>
+            <td>Laptop</td>
+            <td><span class="status shipped">Shipped</span></td>
+        </tr>
+        <tr>
+            <td>1003</td>
+            <td>Mike Johnson</td>
+            <td>Tablet</td>
+            <td><span class="status delivered">Delivered</span></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
