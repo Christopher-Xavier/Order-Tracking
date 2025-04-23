@@ -3,33 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Tracking App</title>
+    <title>Order Tracking Dashboard</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-            transition: background-color 0.3s ease;
+            background-color: #f5f5f5;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         header {
             background-color: #0073e6;
             color: white;
             padding: 20px;
             text-align: center;
-            font-size: 24px;
+            font-size: 26px;
+            font-weight: bold;
+            text-transform: uppercase;
         }
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 20px auto;
             background: white;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         #search {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -41,7 +43,7 @@
             margin-top: 10px;
         }
         th, td {
-            padding: 10px;
+            padding: 12px;
             border: 1px solid #ddd;
             text-align: center;
         }
@@ -50,25 +52,19 @@
             color: white;
         }
         .status {
-            padding: 5px 10px;
-            border-radius: 5px;
+            padding: 8px 12px;
+            border-radius: 6px;
             font-weight: bold;
             display: inline-block;
-            min-width: 80px;
+            min-width: 100px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
         }
-        .pending {
-            background-color: #ffcc00;
-        }
-        .shipped {
-            background-color: #00cc66;
-            color: white;
-        }
-        .delivered {
-            background-color: #0099ff;
-            color: white;
-        }
+        .pending { background-color: #ffcc00; }
+        .shipped { background-color: #00cc66; color: white; }
+        .delivered { background-color: #0099ff; color: white; }
         .dark-mode {
-            background-color: #333;
+            background-color: #222;
             color: white;
         }
         .toggle-container {
@@ -76,22 +72,22 @@
             margin: 20px 0;
         }
         .toggle-btn {
-            padding: 10px 20px;
+            padding: 12px 20px;
             background-color: #0073e6;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            transition: all 0.3s ease;
         }
-        .toggle-btn:hover {
-            background-color: #005bb5;
-        }
+        .toggle-btn:hover { background-color: #005bb5; }
+        tr:hover { background-color: #f1f1f1; transition: all 0.2s ease; }
     </style>
 </head>
 <body>
 
-<header>Business Order Tracking</header>
+<header>Order Tracking Dashboard</header>
 
 <div class="container">
     <input type="text" id="search" placeholder="Search Order ID or Customer..." onkeyup="searchOrders()">
@@ -110,4 +106,47 @@
         </tr>
         <tr>
             <td>1002</td>
-            <td>Jane Smith</
+            <td>Jane Smith</td>
+            <td>Laptop</td>
+            <td><span class="status shipped">Shipped</span></td>
+        </tr>
+        <tr>
+            <td>1003</td>
+            <td>Mike Johnson</td>
+            <td>Tablet</td>
+            <td><span class="status delivered">Delivered</span></td>
+        </tr>
+    </table>
+</div>
+
+<div class="toggle-container">
+    <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+</div>
+
+<script>
+    function searchOrders() {
+        let input = document.getElementById("search").value.toUpperCase();
+        let table = document.getElementById("ordersTable");
+        let rows = table.getElementsByTagName("tr");
+
+        for (let i = 1; i < rows.length; i++) {
+            let cells = rows[i].getElementsByTagName("td");
+            let match = false;
+            
+            for (let j = 0; j < cells.length; j++) {
+                if (cells[j].innerText.toUpperCase().indexOf(input) > -1) {
+                    match = true;
+                    break;
+                }
+            }
+            rows[i].style.display = match ? "" : "none";
+        }
+    }
+
+    function toggleDarkMode() {
+        document.body.classList.toggle("dark-mode");
+    }
+</script>
+
+</body>
+</html>
