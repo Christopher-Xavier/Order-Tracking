@@ -6,10 +6,11 @@
     <title>Order Tracking App</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f8f9fa;
+            transition: background-color 0.3s ease;
         }
         header {
             background-color: #0073e6;
@@ -26,10 +27,18 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
+        #search {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 10px;
         }
         th, td {
             padding: 10px;
@@ -44,6 +53,8 @@
             padding: 5px 10px;
             border-radius: 5px;
             font-weight: bold;
+            display: inline-block;
+            min-width: 80px;
         }
         .pending {
             background-color: #ffcc00;
@@ -56,6 +67,26 @@
             background-color: #0099ff;
             color: white;
         }
+        .dark-mode {
+            background-color: #333;
+            color: white;
+        }
+        .toggle-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .toggle-btn {
+            padding: 10px 20px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .toggle-btn:hover {
+            background-color: #005bb5;
+        }
     </style>
 </head>
 <body>
@@ -63,8 +94,8 @@
 <header>Business Order Tracking</header>
 
 <div class="container">
-    <h2>Orders Overview</h2>
-    <table>
+    <input type="text" id="search" placeholder="Search Order ID or Customer..." onkeyup="searchOrders()">
+    <table id="ordersTable">
         <tr>
             <th>Order ID</th>
             <th>Customer</th>
@@ -79,18 +110,4 @@
         </tr>
         <tr>
             <td>1002</td>
-            <td>Jane Smith</td>
-            <td>Laptop</td>
-            <td><span class="status shipped">Shipped</span></td>
-        </tr>
-        <tr>
-            <td>1003</td>
-            <td>Mike Johnson</td>
-            <td>Tablet</td>
-            <td><span class="status delivered">Delivered</span></td>
-        </tr>
-    </table>
-</div>
-
-</body>
-</html>
+            <td>Jane Smith</
