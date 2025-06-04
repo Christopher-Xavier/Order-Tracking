@@ -29,6 +29,139 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        margin: 0; padding: 0;
+        background-color: #f5f5f5;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    header {
+        background-color: #0073e6;
+        color: white; padding: 20px; text-align: center;
+        font-size: 26px; font-weight: bold; text-transform: uppercase;
+    }
+    .container {
+        max-width: 1000px; margin: 20px auto; background: white; padding: 20px;
+        border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    #search {
+        width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc;
+        border-radius: 5px; font-size: 16px;
+    }
+    table {
+        width: 100%; border-collapse: collapse; margin-top: 10px;
+    }
+    th, td {
+        padding: 12px; border: 1px solid #ddd; text-align: center;
+    }
+    th { background-color: #0073e6; color: white; }
+    .status {
+        padding: 8px 12px; border-radius: 6px; font-weight: bold;
+        display: inline-block; min-width: 100px; text-transform: uppercase;
+        transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        cursor: pointer;
+    }
+    .pending { background-color: #ffcc00; }
+    .shipped { background-color: #00cc66; color: white; }
+    .delivered { background-color: #0099ff; color: white; }
+    .dark-mode { background-color: #222; color: white; }
+    .toggle-container { text-align: center; margin: 20px 0; }
+    .toggle-btn {
+        padding: 12px 20px; background-color: #0073e6; color: white;
+        border: none; border-radius: 5px; cursor: pointer; font-size: 16px;
+        transition: all 0.3s ease;
+    }
+    .toggle-btn:hover { background-color: #005bb5; }
+    .status:active { transform: scale(1.1); }
+    tr:hover { background-color: #f1f1f1; transition: all 0.2s ease; }
+</style>
+
+    <header>Order Tracking Dashboard</header>
+
+    <div class="container">
+        <input type="text" id="search" placeholder="Search Order ID or Customer..." onkeyup="searchOrders()">
+        <table id="ordersTable">
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>1001</td>
+                <td>John Doe</td>
+                <td>Smartphone</td>
+                <td><span class="status pending">Pending</span></td>
+            </tr>
+            <tr>
+                <td>1002</td>
+                <td>Jane Smith</td>
+                <td>Laptop</td>
+                <td><span class="status shipped">Shipped</span></td>
+            </tr>
+            <tr>
+                <td>1003</td>
+                <td>Mike Johnson</td>
+                <td>Tablet</td>
+                <td><span class="status delivered">Delivered</span></td>
+            </tr>
+        </table>
+        <p id="orderCount">Total Orders: 3</p>
+    </div>
+
+    <div class="toggle-container">
+        <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    </div>
+
+    <script>
+        function searchOrders() {
+            let input = document.getElementById("search").value.toUpperCase();
+            let table = document.getElementById("ordersTable");
+            let rows = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < rows.length; i++) {
+                let cells = rows[i].getElementsByTagName("td");
+                let match = false;
+                
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j].innerText.toUpperCase().indexOf(input) > -1) {
+                        match = true;
+                        break;
+                    }
+                }
+                rows[i].style.display = match ? "" : "none";
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+
+        function updateOrderCount() {
+            document.getElementById("orderCount").innerText = `Total Orders: ${document.querySelectorAll("#ordersTable tr").length - 1}`;
+        }
+
+        document.querySelectorAll(".status").forEach(status => {
+            status.addEventListener("click", function() {
+                const statuses = ["Pending", "Shipped", "Delivered"];
+                let currentIndex = statuses.indexOf(this.innerText);
+                this.innerText = statuses[(currentIndex + 1) % statuses.length];
+                this.className = `status ${statuses[(currentIndex + 1) % statuses.length].toLowerCase()}`;
+
+                if (this.innerText === "Delivered") {
+                    confetti({
+                        particleCount: 100,
+                        spread: 60,
+                        origin: { y: 0.8 }
+                    });
+                }
+                updateOrderCount();
+            });
+        });
+    </script>
+
+ 
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

@@ -4,6 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+document.querySelectorAll(".status").forEach(status => {
+    status.addEventListener("click", function() {
+        const statuses = ["Pending", "Shipped", "Delivered"];
+        let currentIndex = statuses.indexOf(this.innerText);
+        this.innerText = statuses[(currentIndex + 1) % statuses.length];
+        this.className = `status ${statuses[(currentIndex + 1) % statuses.length].toLowerCase()}`;
+    });
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+.status {
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+.status:active {
+    transform: scale(1.1);
+}

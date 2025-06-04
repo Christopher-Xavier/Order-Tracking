@@ -1,10 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
+import Navbar from "./components/NavBar";
 
 function App() {
-      return (
-            <div>
-                  <h1>Business Order Tracking, Welcome!</h1>       
-                   </div>);
+  return (
+    <div>
+      <Navbar />
+      <main>
+        {/* Your main content here */}
+      </main>
+    </div>
+  );
 }
+
 export default App;
